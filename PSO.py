@@ -5,7 +5,6 @@ import pandas as pd
 
 from ggmfit import *
 from mutual_information import *
-from sphere import *
 from data_loader import *
 
 class fitness():
