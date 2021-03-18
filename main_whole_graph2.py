@@ -59,7 +59,7 @@ def main():
     parser = argparse.ArgumentParser(description="MDD")
     parser.add_argument('-I', '--idx', type=int, default=0, metavar='I')
     parser.add_argument('-R', '--sparserate', type=float, default=0.3, metavar='S')
-    parser.add_argument('-M', '--learnmethod', type=str, default="mi")
+    parser.add_argument('-M', '--learnmethod', type=str, default="pca")
     args = parser.parse_args()
 
     DATA_PATH = "D:/code/DTI_data/ADNI3_ADvsMCI_FN/"
@@ -90,7 +90,7 @@ def main():
     # MI learning
     k = 3
     fs_num = 30
-    pca_num = 10
+    pca_num = 5
 
     # PSO parameters
     part_num = 30
@@ -245,20 +245,20 @@ def main():
     print("ACC: {:.2f}%, SEN: {:.2f}%, SPE: {:.2f}%".format(Acc * 100, Sen * 100, Spe * 100))
 
     
-    sort_idx = np.argsort(sort_sum)
-    value = np.arange(0, k*x.shape[1])
-    value = value + 1
-    sort_value = np.zeros(k*x.shape[1])
-    sort_value[sort_idx] = value
-    sort_value = np.reshape(sort_value, (k,x.shape[1])).T
+    # sort_idx = np.argsort(sort_sum)
+    # value = np.arange(0, k*x.shape[1])
+    # value = value + 1
+    # sort_value = np.zeros(k*x.shape[1])
+    # sort_value[sort_idx] = value
+    # sort_value = np.reshape(sort_value, (k,x.shape[1])).T
 
-    f, ax = plt.subplots(figsize=(6,6))
+    # f, ax = plt.subplots(figsize=(6,6))
 
-    ax = sns.heatmap(sort_value, annot=True, vmin=1, vmax=36, annot_kws={"fontsize":14}, cbar=False)
-    ax.tick_params(left=False, bottom=False)
-    plt.savefig('D:/feature_selection_aver.jpg')
+    # ax = sns.heatmap(sort_value, annot=True, vmin=1, vmax=36, annot_kws={"fontsize":14}, cbar=False)
+    # ax.tick_params(left=False, bottom=False)
+    # plt.savefig('D:/feature_selection_aver.jpg')
 
-    print(b_count)
+    # print(b_count)
 
     endtime = time.time()
     runtime = endtime - starttime
