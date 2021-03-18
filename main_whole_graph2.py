@@ -62,8 +62,8 @@ def main():
     parser.add_argument('-M', '--learnmethod', type=str, default="pca")
     args = parser.parse_args()
 
-    DATA_PATH = "D:/code/DTI_data/ADNI3_ADvsMCI_FN/"
-    output_path = "D:/code/mutual_information_ADNI3_output/AD_vs_MCI/"
+    DATA_PATH = "D:/Project/ADNI_data/dataset/ADNI3_ADvsMCI_FN/"
+    output_path = "D:/Project/ADNI_data/dataset/mutual_information_ADNI3_output/AD_vs_MCI/"
     filelist = data_list(DATA_PATH)
     dataset = MRI_Dataset(filelist)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=1000, shuffle=False)
@@ -73,7 +73,7 @@ def main():
         idx = idx.numpy()
 
     node_idx = nodes_selection_ADNI()
-    x = x[:, node_idx, :][:, :, node_idx]
+    # x = x[:, node_idx, :][:, :, node_idx]
 
     x = noise_filter(x, 0.05)
 
