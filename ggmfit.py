@@ -50,7 +50,13 @@ def ggmfit(S, G, maxIter):
             W11_nz = W11[notzero][:, notzero]
 
             beta = np.matlib.zeros((p-1, 1), dtype=W.dtype)
-            beta[notzero] = W11_nz.I * S12_nz
+            try:
+                beta[notzero] = W11_nz.I * S12_nz
+            except:
+                print("singular matrix.")            
+                W11_nz = W11_nz + W11_nz[0,0] * 0.001 * np.matrix(np.identity(W11_nz.shape[0]))
+                beta[notzero] = W11_nz.I * S12_nz
+
             # W12 = W11 * beta
             W12 = W11 * beta
             W[notj, j] = W12.T      # pay attention to this line.

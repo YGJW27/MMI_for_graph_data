@@ -58,12 +58,12 @@ class MRI_Dataset(torch.utils.data.Dataset):
 def main():
     parser = argparse.ArgumentParser(description="MDD")
     parser.add_argument('-I', '--idx', type=int, default=0, metavar='I')
-    parser.add_argument('-R', '--sparserate', type=float, default=0.3, metavar='S')
+    parser.add_argument('-R', '--sparserate', type=float, default=0.5, metavar='S')
     parser.add_argument('-M', '--learnmethod', type=str, default="pca")
     args = parser.parse_args()
 
-    DATA_PATH = "D:/Project/ADNI_data/dataset/ADNI3_ADvsMCI_FN/"
-    output_path = "D:/Project/ADNI_data/dataset/mutual_information_ADNI3_output/AD_vs_MCI/"
+    DATA_PATH = "D:/Project/ADNI_data/dataset/ADNI3_MCIvsCN_FN/"
+    output_path = "D:/Project/ADNI_data/dataset/mutual_information_ADNI3_output/MCI_vs_CN/"
     filelist = data_list(DATA_PATH)
     dataset = MRI_Dataset(filelist)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=1000, shuffle=False)
@@ -73,7 +73,7 @@ def main():
         idx = idx.numpy()
 
     node_idx = nodes_selection_ADNI()
-    # x = x[:, node_idx, :][:, :, node_idx]
+    x = x[:, node_idx, :][:, :, node_idx]
 
     x = noise_filter(x, 0.05)
 
@@ -88,9 +88,9 @@ def main():
     starttime = time.time()
 
     # MI learning
-    k = 3
+    k = 4
     fs_num = 30
-    pca_num = 5
+    pca_num = 40
 
     # PSO parameters
     part_num = 30

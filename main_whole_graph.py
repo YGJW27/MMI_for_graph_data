@@ -56,13 +56,13 @@ class MRI_Dataset(torch.utils.data.Dataset):
 
 def main():
     parser = argparse.ArgumentParser(description="MDD")
-    parser.add_argument('-I', '--idx', type=int, default=0, metavar='I')
-    parser.add_argument('-R', '--sparserate', type=float, default=0.4, metavar='S')
-    parser.add_argument('-M', '--learnmethod', type=str, default="pca")
+    parser.add_argument('-I', '--idx', type=int, default=6, metavar='I')
+    parser.add_argument('-R', '--sparserate', type=float, default=0.3, metavar='S')
+    parser.add_argument('-M', '--learnmethod', type=str, default="mi")
     args = parser.parse_args()
 
-    DATA_PATH = "D:/code/DTI_data/ADNI3_ADvsCN_FN/"
-    output_path = "D:/code/mutual_information_ADNI3_output/AD_vs_CN/"
+    DATA_PATH = "D:/Project/ADNI_data/dataset/ADNI3_MCIvsCN_FN/"
+    output_path = "D:/Project/ADNI_data/dataset/mutual_information_ADNI3_output/MCI_vs_CN/"
     filelist = data_list(DATA_PATH)
     dataset = MRI_Dataset(filelist)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=1000, shuffle=False)
@@ -89,7 +89,7 @@ def main():
     # MI learning
     k = 4
     fs_num = 20
-    pca_num = 20
+    pca_num = 30
 
     # PSO parameters
     part_num = 30

@@ -59,7 +59,7 @@ def main():
     parser.add_argument('-R', '--sparserate', type=float, default=0.4, metavar='S')
     args = parser.parse_args()
 
-    DATA_PATH = "D:/code/DTI_data/ADNI3_ADvsCN_FN/"
+    DATA_PATH = "D:/Project/ADNI_data/dataset/ADNI3_MCIvsCN_FN/"
     filelist = data_list(DATA_PATH)
     dataset = MRI_Dataset(filelist)
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=1000, shuffle=False)
@@ -80,7 +80,7 @@ def main():
     starttime = time.time()
 
     # MI learning
-    fs_num = 20
+    fs_num = 25
 
     # 10-fold validation
     acc_sum = 0
